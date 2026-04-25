@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .controls {
+    margin: 20px 0;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  
+  .item {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 6px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .addBtn { background: green; color: white; }
+  .editBtn { background: orange; color: white; }
+  .deleteBtn { background: red; color: white; }
+  
+  .cart-box {
+    margin-top: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  .dark {
+    background: #222;
+    color: white;
+  }

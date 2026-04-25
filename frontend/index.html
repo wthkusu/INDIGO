@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Indigo Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <h1>🥘 Indigo Menu</h1>
+    <button id="themeToggle">🌙</button>
+  </header>
+
+  <div class="controls">
+    <label>Filter:</label>
+    <select id="categoryFilter">
+      <option value="all">All</option>
+      <option value="food">Food</option>
+      <option value="drink">Drinks</option>
+    </select>
+  </div>
+
+  <form id="addItemForm">
+    <input id="name" placeholder="Name" required>
+    <input id="price" type="number" placeholder="Price" required>
+    <input id="category" placeholder="Category (food/drink)" required>
+    <button type="submit">Add Item</button>
+  </form>
+
+  <div id="menu" class="grid"></div>
+
+  <div class="cart-box">
+    <h2>🛒 Cart</h2>
+    <ul id="cart"></ul>
+    <p>Total: $<span id="total">0</span></p>
+  </div>
+
+</div>
+
+<script src="vanillascript.js"></script>
+</body>
+</html>

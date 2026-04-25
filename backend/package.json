@@ -1,0 +1,27 @@
+{
+  "name": "indigo",
+  "version": "1.0.0",
+  "description": "This is a simple web application that allows users to browse a restaurant menu, filter items by category, and add items to a cart with a live total price.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wthkusu/INDIGO.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/wthkusu/INDIGO/issues"
+  },
+  "homepage": "https://github.com/wthkusu/INDIGO#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mysql2": "^3.22.2"
+  }
+}
