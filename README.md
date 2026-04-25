@@ -1,47 +1,146 @@
-# INDIGO 🥘
+# 🍽️ Indigo Restaurant Web App
 
-## 📌 Project Description
-
-This is a simple web application that allows users to browse a restaurant menu, filter items by category, and add items to a cart with a live total price.
+A full-stack restaurant management web app with menu browsing, cart functionality, and persistent stock management using MySQL.
 
 ---
 
 ## 🚀 Features
 
-* 🎚️ Filter menu items by category (Food, Drinks, etc.)
-* 🛒 Add items to cart
-* 📊 Dynamic total price calculation
-* ❌ Remove items from cart
+* 🧾 View menu items from database
+* ➕ Add, edit, delete menu items (CRUD)
+* 📦 Persistent stock management (MySQL)
+* 🛒 Simple shopping cart system
 * 🌙 Dark mode toggle
+* 📂 Category filtering (Food / Drinks)
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Tech Stack
+
+**Frontend**
 
 * HTML
 * CSS
 * Vanilla JavaScript
 
+**Backend**
+
+* Node.js
+* Express.js
+
+**Database**
+
+* MySQL
+
 ---
 
-## 📂 Project Structure
+## 📁 Project Structure
 
-restaurant-menu-app/
+```
+INDIGO/
 │
-├── index.html
-├── style.css
-├── script.js
+├── backend/
+│   ├── server.js
+│   ├── package.json
+│
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   ├── vanillascript.js
+│
+├── .gitignore
 └── README.md
+```
 
 ---
 
-## 👥 Team Members
+## ⚙️ Setup Instructions
 
-* Kusumita
-* Salman
-* Hashim
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Haze-Ez/WebApp2026.git
+cd WebApp2026
+```
 
 ---
 
+### 2. Install backend dependencies
 
+```bash
+cd backend
+npm install
+```
+
+---
+
+### 3. Configure MySQL
+
+Create a database:
+
+```sql
+CREATE DATABASE indigo_db;
+```
+
+Create table:
+
+```sql
+CREATE TABLE menu_items (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255),
+  price DECIMAL(10,2),
+  category VARCHAR(100),
+  stock INT DEFAULT 0
+);
+```
+
+---
+
+### 4. Update DB credentials in `server.js`
+
+```js
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "YOUR_PASSWORD",
+  database: "indigo_db"
+});
+```
+
+---
+
+### 5. Run backend
+
+```bash
+node server.js
+```
+
+Server runs on:
+👉 http://localhost:3000
+
+---
+
+### 6. Run frontend
+
+Open:
+
+```
+frontend/index.html
+```
+
+(using Live Server recommended)
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint         | Description   |
+| ------ | ---------------- | ------------- |
+| GET    | /items           | Get all items |
+| POST   | /items           | Add new item  |
+| PUT    | /items/:id       | Update item   |
+| DELETE | /items/:id       | Delete item   |
+| PUT    | /items/:id/stock | Update stock  |
+
+---
 
