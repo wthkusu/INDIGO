@@ -59,7 +59,7 @@ INDIGO/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Haze-Ez/WebApp2026.git
+git clone https://github.com/wthkusu/INDIGO
 cd WebApp2026
 ```
 
