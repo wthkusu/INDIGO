@@ -60,7 +60,7 @@ INDIGO/
 
 ```bash
 git clone https://github.com/wthkusu/INDIGO
-cd WebApp2026
+cd Indigo
 ```
 
 ---
