@@ -12,22 +12,27 @@
   <header>
     <h1>🥘 Indigo Menu</h1>
     <button id="themeToggle">🌙</button>
+    <button id="roleToggle">Switch Role</button>
+    <span id="currentRole"></span>
   </header>
 
   <div class="controls">
     <label>Filter:</label>
-    <select id="categoryFilter">
-      <option value="all">All</option>
-      <option value="food">Food</option>
-      <option value="drink">Drinks</option>
-    </select>
+    <select id="categoryFilter"></select>
   </div>
 
+  <!-- ADD ITEM -->
   <form id="addItemForm">
     <input id="name" placeholder="Name" required>
     <input id="price" type="number" placeholder="Price" required>
-    <input id="category" placeholder="Category (food/drink)" required>
+    <input id="category" placeholder="Category" required>
     <button type="submit">Add Item</button>
+  </form>
+
+  <!-- ADD CATEGORY -->
+  <form id="addCategoryForm">
+    <input id="newCategory" placeholder="New Category" required>
+    <button type="submit">Add Category</button>
   </form>
 
   <div id="menu" class="grid"></div>

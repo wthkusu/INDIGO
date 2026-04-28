@@ -49,8 +49,25 @@ body {
     padding: 15px;
     border-radius: 10px;
   }
-  
   .dark {
-    background: #222;
-    color: white;
-  }
+  background: #222;
+  color: white;
+}
+
+.dark .item {
+  background: #333;
+  color: white;
+}
+
+.dark .cart-box {
+  background: #333;
+  color: white;
+}
+
+.dark input,
+.dark select,
+.dark button {
+  background: #444;
+  color: white;
+  border: 1px solid #666;
+}

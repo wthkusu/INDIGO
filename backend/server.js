@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -8,13 +9,13 @@ app.use(express.json());
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "My$ql1205", 
+  password: "My$ql1205",
   database: "indigo_db"
 });
 
 db.connect(err => {
   if (err) {
-    console.error(" MySQL connection failed:", err.message);
+    console.error("MySQL connection failed:", err.message);
     return;
   }
   console.log("Connected to MySQL");
@@ -24,82 +25,70 @@ app.get("/", (req, res) => {
   res.send("🚀 Indigo API is running!");
 });
 
-// GET ALL ITEMS
+// GET ITEMS
 app.get("/items", (req, res) => {
   db.query("SELECT * FROM menu_items", (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Database error" });
-    }
+    if (err) return res.status(500).json({ error: "Database error" });
     res.json(results);
   });
 });
 
-// CREATE ITEM (WITH STOCK)
+// ADD ITEM
 app.post("/items", (req, res) => {
-  const { name, price, category, stock } = req.body;
+  const { name, price, category } = req.body;
 
-  const sql = `
-    INSERT INTO menu_items (name, price, category, stock)
-    VALUES (?, ?, ?, ?)
-  `;
-
-  db.query(sql, [name, price, category, stock || 5], (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Insert failed" });
+  db.query(
+    "INSERT INTO menu_items (name, price, category, stock) VALUES (?, ?, ?, 5)",
+    [name, price, category],
+    err => {
+      if (err) return res.status(500).json({ error: "Insert failed" });
+      res.json({ message: "Item added" });
     }
-    res.json({ message: "✅ Item added" });
-  });
+  );
 });
 
-// UPDATE ITEM (WITH STOCK)
+// UPDATE ITEM
 app.put("/items/:id", (req, res) => {
   const { name, price, category, stock } = req.body;
-  const { id } = req.params;
 
-  const sql = `
-    UPDATE menu_items
-    SET name=?, price=?, category=?, stock=?
-    WHERE id=?
-  `;
-
-  db.query(sql, [name, price, category, stock, id], (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Update failed" });
+  db.query(
+    "UPDATE menu_items SET name=?, price=?, category=?, stock=? WHERE id=?",
+    [name, price, category, stock, req.params.id],
+    err => {
+      if (err) return res.status(500).json({ error: "Update failed" });
+      res.json({ message: "Item updated" });
     }
-    res.json({ message: "✏️ Item updated" });
-  });
-});
-
-// UPDATE STOCK ONLY
-app.put("/items/:id/stock", (req, res) => {
-  const { stock } = req.body;
-  const { id } = req.params;
-
-  const sql = "UPDATE menu_items SET stock=? WHERE id=?";
-
-  db.query(sql, [stock, id], (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Stock update failed" });
-    }
-    res.json({ message: "📦 Stock updated" });
-  });
+  );
 });
 
 // DELETE ITEM
 app.delete("/items/:id", (req, res) => {
-  const { id } = req.params;
-
-  db.query("DELETE FROM menu_items WHERE id=?", [id], (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Delete failed" });
-    }
-    res.json({ message: "🗑️ Item deleted" });
+  db.query("DELETE FROM menu_items WHERE id=?", [req.params.id], err => {
+    if (err) return res.status(500).json({ error: "Delete failed" });
+    res.json({ message: "Item deleted" });
   });
+});
+
+// GET CATEGORIES
+app.get("/categories", (req, res) => {
+  db.query("SELECT * FROM categories", (err, results) => {
+    if (err) return res.status(500).json({ error: "DB error" });
+    res.json(results);
+  });
+});
+
+// ADD CATEGORY
+app.post("/categories", (req, res) => {
+  const { name } = req.body;
+
+  db.query(
+    "INSERT INTO categories (name) VALUES (?)",
+    [name],
+    err => {
+      if (err) return res.status(500).json({ error: "Insert failed" });
+      res.json({ message: "Category added" });
+    }
+  );
 });
 
 app.listen(3000, () => {
