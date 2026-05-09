@@ -22,13 +22,22 @@ function loadCategories() {
   fetch("http://localhost:3000/categories")
     .then(res => res.json())
     .then(data => {
+      // 1. Update the Filter Dropdown
       filter.innerHTML = '<option value="all">All</option>';
+      
+      // 2. Get reference to the New Item Dropdown
+      const addItemCategoryDropdown = document.getElementById("addItemCategory");
+      addItemCategoryDropdown.innerHTML = '<option value="" disabled selected>Select Category</option>';
 
       data.forEach(cat => {
         const option = document.createElement("option");
         option.value = cat.name;
         option.textContent = cat.name;
-        filter.appendChild(option);
+        
+        // Add to filter
+        filter.appendChild(option.cloneNode(true));
+        // Add to "Add Item" form
+        addItemCategoryDropdown.appendChild(option);
       });
     });
 }
@@ -166,7 +175,8 @@ document.getElementById("addItemForm").addEventListener("submit", e => {
 
   const name = document.getElementById("name").value;
   const price = document.getElementById("price").value;
-  const category = document.getElementById("category").value;
+  // Changed ID to match the new select element
+  const category = document.getElementById("addItemCategory").value; 
 
   fetch("http://localhost:3000/items", {
     method: "POST",
